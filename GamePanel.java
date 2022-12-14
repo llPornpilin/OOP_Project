@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
     
-    /////// put Item//////////
+     /////// put Item//////////
     public void setupGame(){ // set up before game start // shark
         aSetter.setObjectShark();
         aSetter.setObjectOctopus();
@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
     /////////////////////////
     
     public void startGameThread() {
- 
+        
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -82,9 +82,12 @@ public class GamePanel extends JPanel implements Runnable{
         double nextDrawTime = System.nanoTime() + drawInterval;
         
         while(gameThread != null) {
-            
             //UPDATE
-            update();
+            try {
+                update();
+            } catch (Exception ex) {
+                Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
             //DRAW
             repaint();
             
@@ -97,7 +100,7 @@ public class GamePanel extends JPanel implements Runnable{
                 }
                 
                 Thread.sleep((long) remainingTime);
-                player.setJump(0);
+//                player.setJump(0);
                 nextDrawTime += drawInterval;
                 
             } catch (InterruptedException ex) {
@@ -107,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         }
     }
-    public void update() {
+    public void update() throws Exception {
         player.update();
     }
     
@@ -118,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g;
         
         tileM.draw(g2);
-<<<<<<< HEAD
+        
         /////// put Item//////////
         for (int i = 0; i < obj.length; i++){
             if (obj[i] != null){
@@ -131,10 +134,8 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
         /////////////////////////////
-        player.draw(g2);
-=======
+        
         player.draw(g2);      
->>>>>>> 66dddd2dc6f0826cb5c843c13f50341d4d9570aa
         
         g2.dispose();
     }
