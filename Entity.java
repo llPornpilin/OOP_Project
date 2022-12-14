@@ -24,5 +24,10 @@ public class Entity {
     public int spriteNum = 1;
     
     public Rectangle solidArea;
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
+    
+    public static boolean audioOn = false;
+    
+    public int checkJump = 0;
 }
