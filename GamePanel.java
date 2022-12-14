@@ -50,6 +50,12 @@ public class GamePanel extends JPanel implements Runnable{
     /////// put Item//////////
     public SuperObject obj[] = new SuperObject[10]; // 10 -> means 10 slots -> can display up to 10 objs in same time // shark
     public SuperObject obj2[] = new SuperObject[10]; // octopus
+    
+    public SuperObject obj3[] = new SuperObject[10];
+    public SuperObject obj4[] = new SuperObject[10];
+    public SuperObject obj5[] = new SuperObject[10];
+    public SuperObject obj6[] = new SuperObject[10];
+    
     public AssetSetter aSetter = new AssetSetter(this);
     
     //Set Player defult position
@@ -66,6 +72,11 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame(){ // set up before game start // shark
         aSetter.setObjectShark();
         aSetter.setObjectOctopus();
+        
+        aSetter.setItemOct();
+        aSetter.setItemAnemone();
+        aSetter.setItemSeagrass1();
+        aSetter.setItemSeagrass2();
     }
     /////////////////////////
     
@@ -127,10 +138,30 @@ public class GamePanel extends JPanel implements Runnable{
             if (obj[i] != null){
                 obj[i].drawShark(g2, this);
             }
-        }
+        }    
         for (int i = 0; i < obj2.length; i++){
             if (obj2[i] != null){
                 obj2[i].drawOctopus(g2, this);
+            }
+        }
+        for (int i = 0; i < obj3.length; i++){
+            if (obj3[i] != null){
+                obj3[i].drawSquid(g2, this);
+            }
+        }
+        for (int i = 0; i < obj4.length; i++){
+            if (obj4[i] != null){
+                obj4[i].drawAnemone(g2, this);
+            }
+        }
+        for (int i = 0; i < obj5.length; i++){
+            if (obj5[i] != null){
+                obj5[i].drawSeagrass1(g2, this);
+            }
+        }
+        for (int i = 0; i < obj6.length; i++){
+            if (obj6[i] != null){
+                obj6[i].drawSeagrass2(g2, this);
             }
         }
         /////////////////////////////
