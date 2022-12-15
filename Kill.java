@@ -22,7 +22,7 @@ public class Kill implements MouseListener{
     private ImageIcon imgMonster1, imgMonster2;
     private Clock clock;
     private Thread tClock;
-    private int countdown = 9;
+    private static int countdown = 9;
     private static int checkResult = 0;
     
     public Kill(){
@@ -49,50 +49,31 @@ public class Kill implements MouseListener{
         Dimension sizeCount = lbCount.getPreferredSize();
         lbCount.setBounds(63, 300, sizeCount.width, sizeCount.height);
         frMonster.add(lbCount);
-        
-        
+
         frMonster.setVisible(true);
         frMonster.setSize(400, 400);
         frMonster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         tClock.start();
         
-//            if (Kill.getCheckResult() == 1){
-//                new DeadMonster();
-//            }
-//            else if (Kill.getCheckResult() == 2){
-//                new DeadMonster();
-//            }
     }
     
     public synchronized void mouseClicked(MouseEvent ev){
-        if (countdown >= 0){
-            if ((clock.getRemainTime() >= 0) && (countdown == 0)){ // Win Case
-                clock.setState(1);
-                new DeadMonster();
-            }
-            else if ((clock.getRemainTime() == 0) && (countdown > 0)){ // Lost Case
-                clock.setState(2);
-                new DeadMonster();
-            }
-            else{
-                clock.setState(0);
-                lbCount.setText("You remain " + countdown + " times.");
-                System.out.println(clock.getRemainTime());
-                System.out.println(" "+countdown);
-            }
+        if (countdown > 0){
+            countdown--;
+            lbCount.setText("You remain " + countdown + " times");
+            this.setCountdown(countdown);
         }
-        countdown--;
     }
     public void mouseEntered(MouseEvent m){}
     public void mouseExited(MouseEvent m){}
     public void mousePressed(MouseEvent m){}
     public void mouseReleased(MouseEvent m){}
     
-    public static void setCheckResult(int checkResult){
-        Kill.checkResult = checkResult;
+    public static int getCountDown(){
+        return Kill.countdown;
     }
-    public static int getCheckResult(){
-        return Kill.checkResult;
+    public static void setCountdown(int countdown){
+        Kill.countdown = countdown;
     }
 }
