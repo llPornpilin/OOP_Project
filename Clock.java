@@ -26,15 +26,16 @@ public class Clock extends JLabel implements Runnable{
                 this.setText(String.format("%02d Seconds", sec));
                 Dimension sizeClock = this.getPreferredSize();
                 this.setBounds(120, 250, sizeClock.width, sizeClock.height);
-                second = sec;
-                getRemainTime();
-               
-                if (getState() == 1){
+
+                this.setRemainTime(sec);
+                if ((this.getRemainTime() >= 0) && (Kill.getCountDown() <= 0)){ // Win Case
+                    state = 1;
                     sec = 0;
-                    Kill.setCheckResult(1);
+                    new DeadMonster();
                 }
-                else if (getState() == 2){
-                    Kill.setCheckResult(1);
+                else if ((this.getRemainTime() == 0) && (Kill.getCountDown() > 0)){ // Lost Case
+                    state = 2;
+                    new DeadMonster();
                 }
                 
                 Thread.sleep(1000);
@@ -47,14 +48,12 @@ public class Clock extends JLabel implements Runnable{
         
     }
     
-    public synchronized int getRemainTime(){
-        return second;
+    public synchronized void setRemainTime(int sec){
+        this.sec = sec;
     }
     
-    public synchronized void setState(int state){
-        this.state = state;
+    public synchronized int getRemainTime(){
+        return sec;
     }
-    public synchronized int getState(){
-        return this.state;
-    }
+    
 }
