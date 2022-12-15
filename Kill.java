@@ -17,13 +17,12 @@ import static javax.swing.text.StyleConstants.Size;
 import java.awt.event.*;
 
 public class Kill implements MouseListener{
-    private JFrame frMonster;
-    private JLabel lbCount, lbMonster, lbKO;
+    private static JFrame frMonster;
+    private JLabel lbCount, lbMonster;
     private ImageIcon imgMonster1, imgMonster2;
     private Clock clock;
     private Thread tClock;
     private static int countdown = 9;
-    private static int checkResult = 0;
     
     public Kill(){
         frMonster = new JFrame();
@@ -35,7 +34,6 @@ public class Kill implements MouseListener{
         lbMonster = new JLabel(imgMonster2);
         lbMonster.addMouseListener(this);
         lbCount.setFont(new Font("Arial", 1, 25));
-        lbKO = new JLabel("KO");
        
         frMonster.setLayout(null);
         Dimension sizeMon = lbMonster.getPreferredSize();
@@ -60,9 +58,9 @@ public class Kill implements MouseListener{
     
     public synchronized void mouseClicked(MouseEvent ev){
         if (countdown > 0){
-            countdown--;
             lbCount.setText("You remain " + countdown + " times");
             this.setCountdown(countdown);
+            countdown--;
         }
     }
     public void mouseEntered(MouseEvent m){}
@@ -76,4 +74,13 @@ public class Kill implements MouseListener{
     public static void setCountdown(int countdown){
         Kill.countdown = countdown;
     }
+    
+    public static JFrame getMonFrame(){
+        return Kill.frMonster;
+    }
+    public static void setMonFrame(JFrame frMonster){
+        Kill.frMonster = frMonster;
+    }
+    
+    
 }
