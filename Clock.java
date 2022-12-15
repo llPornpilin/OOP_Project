@@ -31,17 +31,19 @@ public class Clock extends JLabel implements Runnable{
                 if ((this.getRemainTime() >= 0) && (Kill.getCountDown() <= 0)){ // Win Case
                     state = 1;
                     sec = 0;
-                    new DeadMonster();
+                    Kill.getMonFrame().setVisible(false);
+                    new DeadShark();
                 }
                 else if ((this.getRemainTime() == 0) && (Kill.getCountDown() > 0)){ // Lost Case
                     state = 2;
-                    new DeadMonster();
+                    Kill.getMonFrame().setVisible(false);
+                    new DeadShark();
                 }
                 
                 Thread.sleep(1000);
                 sec--;
             }
-        } 
+        }
         catch (InterruptedException ex) {
             System.out.println(ex);
         }
