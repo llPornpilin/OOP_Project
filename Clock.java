@@ -25,19 +25,19 @@ public class Clock extends JLabel implements Runnable{
                 this.setFont(font);
                 this.setText(String.format("%02d Seconds", sec));
                 Dimension sizeClock = this.getPreferredSize();
-                this.setBounds(120, 250, sizeClock.width, sizeClock.height);
+                this.setBounds(130, 300, sizeClock.width, sizeClock.height);
 
                 this.setRemainTime(sec);
-                if ((this.getRemainTime() >= 0) && (Kill.getCountDown() <= 0)){ // Win Case
+                if ((this.getRemainTime() >= 0) && (KillShark.getCountDown() <= 0)){ // Win Case
                     state = 1;
                     sec = 0;
-                    Kill.getMonFrame().setVisible(false);
+                    KillShark.getMonFrame().setVisible(false);
                     new DeadShark();
                 }
-                else if ((this.getRemainTime() == 0) && (Kill.getCountDown() > 0)){ // Lost Case
+                else if ((this.getRemainTime() == 0) && (KillShark.getCountDown() > 0)){ // Lost Case
                     state = 2;
-                    Kill.getMonFrame().setVisible(false);
-                    new DeadShark();
+                    KillShark.getMonFrame().setVisible(false);
+                    new DeadPlayer();
                 }
                 
                 Thread.sleep(1000);
