@@ -5,10 +5,10 @@
 
 /**
  *
- * @author Pearita
+ * @author LENOVO
  */
 public class Main {
     public static void main(String[] args) {
-        new MainWindow();
+        new Kill();
     }
 }
