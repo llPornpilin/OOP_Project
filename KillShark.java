@@ -16,7 +16,7 @@ import java.awt.Font;
 import static javax.swing.text.StyleConstants.Size;
 import java.awt.event.*;
 
-public class Kill implements MouseListener{
+public class KillShark implements MouseListener{
     private static JFrame frMonster;
     private JLabel lbCount, lbMonster;
     private ImageIcon imgMonster1, imgMonster2;
@@ -24,32 +24,30 @@ public class Kill implements MouseListener{
     private Thread tClock;
     private static int countdown = 9;
     
-    public Kill(){
+    public KillShark(){
         frMonster = new JFrame();
         clock = new Clock();
         tClock = new Thread(clock);
         lbCount = new JLabel("Kill Monster 10 times !");
-        imgMonster1 = new ImageIcon("D:\\_second_year\\OOP\\Monster\\src\\shark.png");
-        imgMonster2 = new ImageIcon(imgMonster1.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH));
+        imgMonster1 = new ImageIcon("D:\\_second_year\\OOP_Project\\ChefBa\\src\\objects\\liveShark.jpg");
+        imgMonster2 = new ImageIcon(imgMonster1.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
         lbMonster = new JLabel(imgMonster2);
         lbMonster.addMouseListener(this);
-        lbCount.setFont(new Font("Arial", 1, 25));
+        lbCount.setFont(new Font("Arial", 1, 28));
        
         frMonster.setLayout(null);
         Dimension sizeMon = lbMonster.getPreferredSize();
-        lbMonster.setBounds(40, 0, sizeMon.width, sizeMon.height);
-        frMonster.add(lbMonster);
-        
-//        Dimension sizeClock = clock.getPreferredSize();
-//        clock.setBounds(60, 280, sizeClock.width, sizeClock.height);
-        frMonster.add(clock);
+        lbMonster.setBounds(0, 0, sizeMon.width, sizeMon.height);
         
         Dimension sizeCount = lbCount.getPreferredSize();
-        lbCount.setBounds(63, 300, sizeCount.width, sizeCount.height);
+        lbCount.setBounds(58, 340, sizeCount.width, sizeCount.height);
+        
+        frMonster.add(clock);
         frMonster.add(lbCount);
+        frMonster.add(lbMonster);
 
         frMonster.setVisible(true);
-        frMonster.setSize(400, 400);
+        frMonster.setSize(415, 430);
         frMonster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         tClock.start();
@@ -58,7 +56,7 @@ public class Kill implements MouseListener{
     
     public synchronized void mouseClicked(MouseEvent ev){
         if (countdown > 0){
-            lbCount.setText("You remain " + countdown + " times");
+            lbCount.setText("You remain _" + countdown + "_ times.");
             this.setCountdown(countdown);
             countdown--;
         }
@@ -69,18 +67,20 @@ public class Kill implements MouseListener{
     public void mouseReleased(MouseEvent m){}
     
     public static int getCountDown(){
-        return Kill.countdown;
+        return KillShark.countdown;
     }
     public static void setCountdown(int countdown){
-        Kill.countdown = countdown;
+        KillShark.countdown = countdown;
     }
     
     public static JFrame getMonFrame(){
-        return Kill.frMonster;
+        return KillShark.frMonster;
     }
     public static void setMonFrame(JFrame frMonster){
-        Kill.frMonster = frMonster;
+        KillShark.frMonster = frMonster;
     }
-    
+    public static void main(String[] args) {
+        new KillShark();
+    }
     
 }
