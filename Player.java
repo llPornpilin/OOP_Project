@@ -36,7 +36,7 @@ public class Player extends Entity{
         
         solidArea = new Rectangle();
         solidArea.x = 17;
-        solidArea.y = 18;
+        solidArea.y = 25;
         solidArea.width = 28;
         solidArea.height= 34;
         
@@ -98,8 +98,8 @@ public class Player extends Entity{
             
             // check obj collision
             int objIndex = gp.cChecker.checkObject(this, true);
+            killMonster(objIndex);
             
-
             //If Collision is False, Player can move  
             if(collisionOn == false){  
                 switch(direction){
@@ -212,6 +212,14 @@ public class Player extends Entity{
                 setJump(0);
                 audioOn = false;
             }
+        }
+    }
+    
+    public void killMonster(int index){
+        if (index != 999){
+            new KillShark();
+            index = 999;
+            System.out.println(index);
         }
     }
     
