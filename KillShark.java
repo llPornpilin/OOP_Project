@@ -18,10 +18,11 @@ import java.awt.event.*;
 
 public class KillShark implements MouseListener{
     private static JFrame frMonster;
-    private JLabel lbCount, lbMonster;
-    private ImageIcon imgMonster1, imgMonster2;
+    private JLabel lbCount, lbSea;
+    private ImageIcon imgSea1, imgSea2;
+    private SharkMove lbShark;
     private Clock clock;
-    private Thread tClock;
+    private Thread tClock, tShark;
     private static int countdown = 9;
     
     public KillShark(){
@@ -29,28 +30,42 @@ public class KillShark implements MouseListener{
         clock = new Clock();
         tClock = new Thread(clock);
         lbCount = new JLabel("Kill Monster 10 times !");
-        imgMonster1 = new ImageIcon("D:\\_second_year\\OOP_Project\\ChefBa\\src\\objects\\liveShark.jpg");
-        imgMonster2 = new ImageIcon(imgMonster1.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
-        lbMonster = new JLabel(imgMonster2);
-        lbMonster.addMouseListener(this);
+        lbShark = new SharkMove();
+        lbShark.addMouseListener(this);
+        tShark = new Thread(lbShark);
+        
+        imgSea1 = new ImageIcon("D:\\_second_year\\OOP_Project\\ChefBa\\src\\objects\\sea.jpg");
+        imgSea2 = new ImageIcon(imgSea1.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
+        lbSea = new JLabel(imgSea2);
         lbCount.setFont(new Font("Arial", 1, 28));
        
         frMonster.setLayout(null);
-        Dimension sizeMon = lbMonster.getPreferredSize();
-        lbMonster.setBounds(0, 0, sizeMon.width, sizeMon.height);
+        Dimension sizeMon = lbShark.getPreferredSize();
+        lbShark.setBounds(0, 0, sizeMon.width, sizeMon.height);
         
         Dimension sizeCount = lbCount.getPreferredSize();
         lbCount.setBounds(58, 340, sizeCount.width, sizeCount.height);
         
+        Dimension sizeSea = lbSea.getPreferredSize();
+        lbSea.setBounds(0, 0, sizeSea.width, sizeSea.height);
+        
         frMonster.add(clock);
         frMonster.add(lbCount);
-        frMonster.add(lbMonster);
+        frMonster.add(lbShark);
+        frMonster.add(lbSea);
+        
+        ///////////////// CENTER JFRAME TT ////////////////////
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - frMonster.getWidth())/2;
+        int y = (screenSize.height - frMonster.getHeight())/2;
+        frMonster.setLocation(x, y);
 
         frMonster.setVisible(true);
         frMonster.setSize(415, 430);
         frMonster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         tClock.start();
+        tShark.start();
         
     }
     
