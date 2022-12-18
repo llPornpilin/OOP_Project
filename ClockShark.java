@@ -12,11 +12,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
-public class Clock extends JLabel implements Runnable{
+public class ClockShark extends JLabel implements Runnable{
     private int sec = 10;
     private int second;
     private int remainTime;
     private int state = 0;
+    private GamePanel gp;
+    private MainWindow main;
     
     public void run(){
         try {
@@ -33,11 +35,21 @@ public class Clock extends JLabel implements Runnable{
                     sec = 0;
                     KillShark.getMonFrame().setVisible(false);
                     new DeadShark();
+                    this.setRemainTime(10);
+                    KillShark.setCountdown(10);
+                    break;
                 }
                 else if ((this.getRemainTime() == 0) && (KillShark.getCountDown() > 0)){ // Lost Case
                     state = 2;
                     KillShark.getMonFrame().setVisible(false);
                     new DeadPlayer();
+                    
+                    Thread.sleep(2000);
+                    main = new MainWindow();
+                    main.getMainFrame().setVisible(true);
+                    this.setRemainTime(10);
+                    KillShark.setCountdown(10);
+                    break;
                 }
                 
                 Thread.sleep(1000);
@@ -57,5 +69,4 @@ public class Clock extends JLabel implements Runnable{
     public synchronized int getRemainTime(){
         return sec;
     }
-    
 }
